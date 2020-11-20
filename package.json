@@ -1,0 +1,18 @@
+{
+  "name": "botonto",
+  "version": "1.0.0",
+  "description": "Pequeno bot creado para discord",
+  "main": "bot.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Gonzalo Leon",
+  "dependencies": {
+    "discord.js": "^12.4.1",
+    "fs": "0.0.1-security",
+    "types": "^0.1.1"
+  },
+  "devDependencies": {
+    "winston": "^3.2.1"
+  }
+}
