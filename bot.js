@@ -4,9 +4,9 @@ let auth = require('./auth.json');
 
 let fs=require("fs")
 let path=require("path")
-
+let usuarios=fs.readFileSync(path.join(__dirname,"diccionario.txt")).toString().split(";")
 let diccionario=fs.readFileSync(path.join(__dirname,"diccionario.txt")).toString().split(";")
-
+let bonks=fs.opendirSync(path.join(__dirname,"."));
 // Configure logger settings
 logger.remove(logger.transports.Console);
 logger.add(new logger.transports.Console);
@@ -37,9 +37,11 @@ client.on('message', function (mensaje) {
     let channel=mensaje.channel;
     let palabra=comprobarpalabra(mensaje.content)
     if(palabra!=="false")
-        channel.send("la palabra baneada es: "+palabra)
+        channel.send("la palabra baneada es: "+palabra+"\nte vas a la carcel pillin", {file:bonks.readSync()})
+
     let autor=mensaje.author
     let guild=mensaje.guild
+
 
 
 
