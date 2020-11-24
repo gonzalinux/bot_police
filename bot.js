@@ -5,8 +5,12 @@ let auth = require('./auth.json');
 
 let fs=require("fs")
 let path=require("path")
-let usuarios=fs.readFileSync(path.join(__dirname,"usuarios.txt")).toString().split(";")
-let diccionario=fs.readFileSync(path.join(__dirname,"diccionario.txt")).toString().split(";")
+let usuarios=fs.readFileSync(path.join(__dirname,"usuarios.txt")).toString().split(",")
+for(let i=0;i<usuarios.length;i++){
+    usuarios[i]=usuarios[i].split(":")
+
+}
+let diccionario=fs.readFileSync(path.join(__dirname,"diccionario.txt")).toString().split(",")
 let bonks=["bonk/bonk.gif"]
 fs.readdir(path.join(__dirname,"bonk"), function (err,archivos){
     if(!err){
@@ -53,8 +57,17 @@ client.on('message', function (mensaje) {
         let ima="./bonk/" + bonks[Math.trunc(Math.random()*bonks.length)]
 
         //ima=fs.readFileSync(ima)
-        channel.send("la palabra baneada es: " + palabra + "\nte vas a la carcel pillin", {files:[ima] })
-        mensaje.member.roles.add("778729551072067585").then(r => NaN)
+        channel.send("la palabra baneada es: " + palabra + "\nte vas a la carcel pillin\ntienes 15 segundos para despedirte", {files:[ima] })
+        setTimeout(()=>{mensaje.member.roles.add("778729551072067585").then(()=>{
+            console.log("Se ha aplicado un rol")
+            setTimeout(()=>{
+                mensaje.member.roles.remove("778729551072067585").then(()=>{
+                    console.log("Se ha eliminado un rol")
+                })
+
+
+            },5*60*1000)
+        })},15000)
     }
 
 
@@ -89,13 +102,32 @@ function prefix(mensaje){
     switch (comando){
         case "add": if(mensaje.member.hasPermission("ADMINISTRATOR")){
             if (texto !== undefined) {
+                if(diccionario.includes(texto)){
+                    mensaje.channel.send("La palabra '" + texto + "' ya era una palabra baneada")
 
-                fs.appendFileSync(path.join(__dirname, "diccionario.txt"), ";" + texto.toLowerCase())
-                diccionario.push(texto.toLowerCase())
-                mensaje.channel.send("Se ha añadido '" + texto + "' a las palabras baneables")
+                }
+                else {
+                    fs.appendFileSync(path.join(__dirname, "diccionario.txt"), ";" + texto.toLowerCase())
+                    diccionario.push(texto.toLowerCase())
+                    mensaje.channel.send("Se ha añadido '" + texto + "' a las palabras baneables")
+                }
             }
         }else mensaje.channel.send(mensaje.author.username+" deja ya la tonteria")
+            break;
+        case "lista":
 
+            let palabras="Las palabras baneadas son:\n"
+            for(let i=0;i<diccionario.length;i++){
+            palabras+=diccionario[i]+"\n"
+        }
+            mensaje.channel.send(palabras);break;
+        case "remove":
+            if(diccionario.includes(texto)){
+                diccionario.splice(diccionario.indexOf(texto),1)
+                fs.writeFileSync("diccionario.txt", diccionario)
+                mensaje.channel.send("Se ha eliminado la palabra '"+texto+"' de las palabras baneables")
+
+            }
 
     }
 
