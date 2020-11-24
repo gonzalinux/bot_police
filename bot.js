@@ -112,7 +112,7 @@ function prefix(mensaje){
 
                 }
                 else {
-                    fs.appendFileSync(path.join(__dirname, "diccionario.txt"), ";" + texto.toLowerCase())
+                    fs.appendFileSync(path.join(__dirname, "diccionario.txt"), "," + texto.toLowerCase())
                     diccionario.push(texto.toLowerCase())
                     mensaje.channel.send("Se ha añadido '" + texto + "' a las palabras baneables")
                 }
