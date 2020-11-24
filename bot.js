@@ -27,7 +27,8 @@ logger.add(new logger.transports.Console);
 logger.level = 'debug';
 //Iniciar el bot
 let client = new Discord.Client();
-client.login(auth.token).then(()=>{console.log("Se ha usado el token")});
+client.login(auth.token).then((err)=>{
+    console.log("Se ha usado el token")});
 
 
 
@@ -59,10 +60,14 @@ client.on('message', function (mensaje) {
         //ima=fs.readFileSync(ima)
         channel.send("la palabra baneada es: " + palabra + "\nte vas a la carcel pillin\ntienes 15 segundos para despedirte", {files:[ima] })
         setTimeout(()=>{mensaje.member.roles.add("778729551072067585").then(()=>{
-            console.log("Se ha aplicado un rol")
+            console.log("Se ha aplicado un rol").catch(()=>{
+                console.log("se ha rechazado el cambio")
+            })
             setTimeout(()=>{
                 mensaje.member.roles.remove("778729551072067585").then(()=>{
                     console.log("Se ha eliminado un rol")
+                }).catch(()=>{
+                    console.log("Se ha rechazado el cambio")
                 })
 
 
@@ -128,6 +133,14 @@ function prefix(mensaje){
                 mensaje.channel.send("Se ha eliminado la palabra '"+texto+"' de las palabras baneables")
 
             }
+            else{
+                mensaje.channel.send("La palabra '"+texto+"' no era una palabra baneable")
+            }break
+        case "foto":
+            let ima="./bonk/" + bonks[Math.trunc(Math.random()*bonks.length)]
+            mensaje.channel.send("Una foto aleatoria:", {files:[ima] })
+
+
 
     }
 
