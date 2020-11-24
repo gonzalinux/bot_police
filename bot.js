@@ -48,7 +48,7 @@ client.on('message', function (mensaje) {
     if(mensaje.author.bot){
         return 0
     }
-    if(mensaje.content.startsWith("HornyP")){
+    if(mensaje.content.startsWith("HornyP")||mensaje.content.startsWith("h ")){
         prefix(mensaje)
         return 0
     }
@@ -98,8 +98,10 @@ function comprobarpalabra(cadena){
 
 function prefix(mensaje){
     let texto=mensaje.content.toString();
-
-    texto=texto.substring(6,texto.length)
+    if(mensaje.content.startsWith("HornyP"))
+        texto=texto.substring(6,texto.length)
+    else
+        texto=texto.substring(2,texto.length)
     texto=texto.trim()
     console.log(texto)
     let comando=texto.split(" ")[0]
