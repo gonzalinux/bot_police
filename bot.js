@@ -159,7 +159,7 @@ function prefix(mensaje){
                     return;
                 }});break;
         case "meme":
-            let meme="./memes/" + memes[Math.trunc(Math.random()*bonks.length)]
+            let meme="./memes/" + memes[Math.trunc(Math.random()*memes.length)]
             mensaje.channel.send("Una meme aleatoria:", {files:[meme] });break;
 
 
