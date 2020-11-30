@@ -157,7 +157,7 @@ function prefix(mensaje){
         case "up":
             let formatovalido=false;
             for(let i=0;i<formatos.length;i++)
-            if(mensaje.content.endsWith(formatos[i])){
+            if(mensaje.content.toLowerCase().endsWith(formatos[i])){
                 formatovalido=true;break;}
             if(!formatovalido)
                 break;
