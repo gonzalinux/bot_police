@@ -179,7 +179,13 @@ function prefix(mensaje){
         case "meme":
             let meme="./memes/" + memes[Math.trunc(Math.random()*memes.length)]
             mensaje.channel.send("Un meme aleatoria:", {files:[meme] });break;
+        case "memelist":
 
+            let memesitos="Las palabras baneadas son:\n"
+            for(let i=0;i<memes.length;i++){
+                memesitos+=memes[i]+"\n"
+            }
+            mensaje.channel.send(memesitos);break;
 
 
 
