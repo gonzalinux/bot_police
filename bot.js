@@ -41,22 +41,24 @@ logger.level = 'debug';
 //Iniciar el bot
 let client = new Discord.Client();
 client.login(auth.token).then((err)=>{
+    if(err)
+        console.log("ha habido un error en el token")
     console.log("Se ha usado el token")});
 
 
 
-client.on('ready', function (evt) {
+client.on('ready', function () {
     console.log('Connected');
     console.log('Logged in as: ');
     console.log(client.user.username+ ' - (' + client.user.id + ')');
 });
 client.on('message', function (mensaje) {
-    let autor=mensaje.author
+   // let autor=mensaje.author
     let guild=mensaje.guild
     rol_horny=guild.roles.fetch("778729551072067585")
     // el evento de encender al recibir mensaje lanza las funciones principales del otro archivo
 
-   let func=require("./Funciones");
+   //let func=require("./Funciones");
    //func.main(user,userID,channelID,message,bot);
     if(mensaje.author.bot){
         return 0
@@ -100,7 +102,7 @@ client.on('message', function (mensaje) {
 function comprobarpalabra(cadena){
     cadena=cadena.split(" ");
     for(let i=0;i<diccionario.length;i++){
-        let tamano=diccionario[i].length;
+        //let tamano=diccionario[i].length;
         for(let j=0;j<cadena.length;j++){
             if(cadena[j].toLowerCase()===diccionario[i])
                 return diccionario[i]
@@ -164,7 +166,7 @@ function prefix(mensaje){
             exec('wget -P memes/ '+texto, (err, stdout, stderr) => {
                 if (err) {
                     console.error(`exec error: ${err}`);
-                    return;
+
                 }
                 else{
                     fs.readdir(path.join(__dirname,"memes"), function (err,archivos){
@@ -187,7 +189,7 @@ function prefix(mensaje){
                 memesitos+=memes[i]+"\n"
             }
             mensaje.channel.send(memesitos);break;
-        case "slmeme":
+        case "memeget":
             let esta=false;
             for(let i=0;i<memes.length;i++){
                 if(texto===memes[i]){
