@@ -157,10 +157,20 @@ function prefix(mensaje){
                 if (err) {
                     console.error(`exec error: ${err}`);
                     return;
-                }});break;
+                }
+                else{
+                    fs.readdir(path.join(__dirname,"memes"), function (err,archivos){
+                        if(!err){
+
+                            memes=archivos
+                        }})
+                    mensaje.channel.send("Se ha añadido el meme")
+                }
+
+            });break;
         case "meme":
             let meme="./memes/" + memes[Math.trunc(Math.random()*memes.length)]
-            mensaje.channel.send("Una meme aleatoria:", {files:[meme] });break;
+            mensaje.channel.send("Un meme aleatoria:", {files:[meme] });break;
 
 
 
