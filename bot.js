@@ -1,7 +1,7 @@
 let Discord = require('discord.js');
 let logger = require('winston');
 let auth = require('./auth.json');
-
+let exec = require('child_process').exec;
 
 let fs=require("fs")
 let path=require("path")
@@ -140,7 +140,13 @@ function prefix(mensaje){
             }break
         case "foto":
             let ima="./bonk/" + bonks[Math.trunc(Math.random()*bonks.length)]
-            mensaje.channel.send("Una foto aleatoria:", {files:[ima] })
+            mensaje.channel.send("Una foto aleatoria:", {files:[ima] });break;
+        case "up":
+            exec('wget -P /memes '+texto, (err, stdout, stderr) => {
+                if (err) {
+                    console.error(`exec error: ${err}`);
+                    return;
+                }});
 
 
 
