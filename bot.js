@@ -181,12 +181,23 @@ function prefix(mensaje){
             mensaje.channel.send("Un meme aleatoria:", {files:[meme] });break;
         case "memelist":
 
-            let memesitos="Las palabras baneadas son:\n"
+            let memesitos="Los memes actuales son:\n"
             for(let i=0;i<memes.length;i++){
                 memesitos+=memes[i]+"\n"
             }
             mensaje.channel.send(memesitos);break;
+        case "slmeme":
+            let esta=false;
+            for(let i=0;i<memes.length;i++){
+                if(texto==memes[i].name){
+                    mensaje.channel.send("Aqui esta tu memmemememememememe:", {files:[memes[i]] });
+                    esta=true;break;
 
+                }
+        }
+        if(!esta)
+            mensaje.channel.send("No se encontro ese meme")
+            break;
 
 
     }
