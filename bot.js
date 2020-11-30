@@ -24,6 +24,7 @@ fs.readdir(path.join(__dirname,"memes"), function (err,archivos){
     if(!err){
 
         memes=archivos
+
     }
 
 });
@@ -189,7 +190,7 @@ function prefix(mensaje){
         case "slmeme":
             let esta=false;
             for(let i=0;i<memes.length;i++){
-                if(texto==memes[i].name){
+                if(texto===memes[i]){
                     mensaje.channel.send("Aqui esta tu memmemememememememe:", {files:[memes[i]] });
                     esta=true;break;
 
