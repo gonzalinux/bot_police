@@ -19,6 +19,17 @@ fs.readdir(path.join(__dirname,"bonk"), function (err,archivos){
 }
 
 });
+let memes=[];
+fs.readdir(path.join(__dirname,"memes"), function (err,archivos){
+    if(!err){
+
+        memes=archivos
+    }
+
+});
+
+
+
 let rol_horny
 
 // Configure logger settings
@@ -146,7 +157,11 @@ function prefix(mensaje){
                 if (err) {
                     console.error(`exec error: ${err}`);
                     return;
-                }});
+                }});break;
+        case "meme":
+            let meme="./memes/" + memes[Math.trunc(Math.random()*bonks.length)]
+            mensaje.channel.send("Una meme aleatoria:", {files:[meme] });break;
+
 
 
 
