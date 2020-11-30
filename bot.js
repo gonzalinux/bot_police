@@ -191,7 +191,7 @@ function prefix(mensaje){
             let esta=false;
             for(let i=0;i<memes.length;i++){
                 if(texto===memes[i]){
-                    let memardo=
+
                     mensaje.channel.send("Aqui esta tu memmemememememememe:", {files:["./memes/"+memes[i]] });
                     esta=true;break;
 
