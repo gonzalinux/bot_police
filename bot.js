@@ -31,6 +31,7 @@ fs.readdir(path.join(__dirname,"memes"), function (err,archivos){
 
 
 let rol_horny
+let formatos=["jpg","png","gif"]
 
 // Configure logger settings
 logger.remove(logger.transports.Console);
@@ -153,6 +154,12 @@ function prefix(mensaje){
             let ima="./bonk/" + bonks[Math.trunc(Math.random()*bonks.length)]
             mensaje.channel.send("Una foto aleatoria:", {files:[ima] });break;
         case "up":
+            let formatovalido=false;
+            for(let i=0;i<formatos.length;i++)
+            if(mensaje.content.endsWith(formatos[i])){
+                formatovalido=true;break;}
+            if(!formatovalido)
+                break;
             exec('wget -P memes/ '+texto, (err, stdout, stderr) => {
                 if (err) {
                     console.error(`exec error: ${err}`);
