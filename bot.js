@@ -163,6 +163,7 @@ function prefix(mensaje){
                         if(!err){
 
                             memes=archivos
+                            console.log(archivos);
                         }})
                     mensaje.channel.send("Se ha añadido el meme")
                 }
