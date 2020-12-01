@@ -32,7 +32,7 @@ fs.readdir(path.join(__dirname,"memes"), function (err,archivos){
 
 
 let rol_horny
-let formatos=["jpg","png","gif"]
+let formatos=["jpg","png","gif","mp4"]
 
 // Configure logger settings
 logger.remove(logger.transports.Console);
