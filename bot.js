@@ -53,6 +53,9 @@ client.on('ready', function () {
     console.log(client.user.username+ ' - (' + client.user.id + ')');
 });
 client.on('message', function (mensaje) {
+
+    rol_horny=mensaje.guild.roles.cache.find(role => role.name === "modo sexo(sin sexo)")
+
    // let autor=mensaje.author
     let guild=mensaje.guild
     rol_horny=guild.roles.fetch("778729551072067585")
@@ -74,12 +77,12 @@ client.on('message', function (mensaje) {
 
         //ima=fs.readFileSync(ima)
         channel.send("la palabra baneada es: " + palabra + "\nte vas a la carcel pillin\ntienes 15 segundos para despedirte", {files:[ima] })
-        setTimeout(()=>{mensaje.member.roles.add("778729551072067585").then(()=>{
+        setTimeout(()=>{mensaje.member.roles.add(rol_horny).then(()=>{
             console.log("Se ha aplicado un rol").catch(()=>{
                 console.log("se ha rechazado el cambio")
             })
             setTimeout(()=>{
-                mensaje.member.roles.remove("778729551072067585").then(()=>{
+                mensaje.member.roles.remove(rol_horny).then(()=>{
                     console.log("Se ha eliminado un rol")
                 }).catch(()=>{
                     console.log("Se ha rechazado el cambio")
